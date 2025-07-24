@@ -10,8 +10,16 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
       - name: Install Snyk
         run: npm install -g snyk
+
+      - name: Install project dependencies
+        run: npm install
 
       - name: Run Snyk Scan
         run: snyk test
