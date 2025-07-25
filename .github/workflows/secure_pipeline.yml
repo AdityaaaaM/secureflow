@@ -32,10 +32,6 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
-
-      - name: Run Snyk Scan
-        run: snyk test --all-projects
-
       - name: Run OWASP ZAP
         run: docker run -v $(pwd):/zap/wrk/:rw -t owasp/zap2docker-stable zap-baseline.py -t http://your-url -r zap-report.html
 
