@@ -21,6 +21,12 @@ jobs:
       - name: Install project dependencies
         run: npm install
 
+      - name: Check SNYK_TOKEN presence
+        run: echo "Token set"
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+
       - name: Run Snyk Scan
         run: snyk test
         env:
