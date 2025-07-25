@@ -33,7 +33,12 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
       - name: Run OWASP ZAP
-        run: docker run -v $(pwd):/zap/wrk/:rw -t owasp/zap2docker-stable zap-baseline.py -t http://your-url -r zap-report.html
+        run: |
+          docker run --rm \
+            -v $(pwd):/zap/wrk/:rw \
+            ghcr.io/zaproxy/zap-full-scan \
+            -t http://localhost:3000 -r zap-report.html
+
 
       - name: Upload Reports
         uses: actions/upload-artifact@v4
